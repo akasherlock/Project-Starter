@@ -40,11 +40,9 @@ public class ToDoListTest {
     public void addManyTasks() {
         toDoList.addTask(t1);
         assertEquals(toDoList.totalTasks() , 1);
-        assertEquals(toDoList.listOfAllTasks().get(0), t1);
 
         toDoList.addTask(t2);
         assertEquals(toDoList.totalTasks() , 2);
-        assertEquals(toDoList.listOfAllTasks().get(1), t2);
 
         toDoList.addTask(t3);
         assertEquals(toDoList.totalTasks() , 3);
@@ -69,15 +67,10 @@ public class ToDoListTest {
 
         toDoList.addTask(t10);
         assertEquals(toDoList.totalTasks() , 10);
-        assertEquals(toDoList.listOfAllTasks().get(9), t10);
-
     }
 
     @Test
     public void markAsCompleteTest() {
-
-        assertFalse(t1.isCompleted());
-
         toDoList.addTask(t1);
         toDoList.addTask(t2);
         toDoList.addTask(t3);
@@ -87,26 +80,23 @@ public class ToDoListTest {
         assertEquals(toDoList.numberOfCompleteTasks(),0);
         assertEquals(toDoList.numberOfIncompleteTasks(),5);
 
-        toDoList.markAsComplete(1);
-        assertEquals(toDoList.listOfAllTasks().get(0), t1);
-        assertTrue(toDoList.listOfAllTasks().get(0).isCompleted());
+        toDoList.markAsComplete(2);
+        assertEquals(toDoList.numberOfCompleteTasks(),1);
+        assertEquals(toDoList.numberOfIncompleteTasks(),4);
 
         toDoList.markAsComplete(2);
-        assertEquals(toDoList.numberOfCompleteTasks(),2);
-        assertEquals(toDoList.numberOfIncompleteTasks(),3);
-
-        toDoList.markAsComplete(2);
-        assertEquals(toDoList.numberOfCompleteTasks(),2);
-        assertEquals(toDoList.numberOfIncompleteTasks(),3);
+        assertEquals(toDoList.numberOfCompleteTasks(),1);
+        assertEquals(toDoList.numberOfIncompleteTasks(),4);
 
         toDoList.markAsComplete(3);
-        assertEquals(toDoList.numberOfCompleteTasks(),3);
-        assertEquals(toDoList.numberOfIncompleteTasks(),2);
+        assertEquals(toDoList.numberOfCompleteTasks(),2);
+        assertEquals(toDoList.numberOfIncompleteTasks(),3);
 
         toDoList.markAsComplete(69);
-        assertEquals(toDoList.numberOfCompleteTasks(),3);
-        assertEquals(toDoList.numberOfIncompleteTasks(),2);
+        assertEquals(toDoList.numberOfCompleteTasks(),2);
+        assertEquals(toDoList.numberOfIncompleteTasks(),3);
 
+        toDoList.markAsComplete(1);
         toDoList.markAsComplete(4);
         toDoList.markAsComplete(5);
 
@@ -122,10 +112,8 @@ public class ToDoListTest {
         toDoList.addTask(t4);
         toDoList.addTask(t5);
 
-        assertEquals(toDoList.listOfAllTasks().get(0), t1);
         toDoList.removeTask(1);
         assertEquals(toDoList.totalTasks(),4);
-        assertNotEquals(toDoList.listOfAllTasks().get(0).getTaskNum(), t1.getTaskNum());
 
         toDoList.removeTask(2);
         assertEquals(toDoList.totalTasks(),3);
@@ -199,17 +187,6 @@ public class ToDoListTest {
         toDoList.addTask(t4);
         toDoList.addTask(t5);
         assertEquals(toDoList.totalTasks(), 5);
-    }
-
-    @Test
-    public void listOfAllTasksTest() {
-        toDoList.addTask(t1);
-        toDoList.addTask(t2);
-        toDoList.addTask(t3);
-
-        assertEquals(toDoList.listOfAllTasks().get(0), t1);
-        assertEquals(toDoList.listOfAllTasks().get(1), t2);
-        assertEquals(toDoList.listOfAllTasks().get(2), t3);
     }
 
 
