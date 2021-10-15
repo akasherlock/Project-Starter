@@ -90,6 +90,23 @@ public class ToDoListTest {
         assertEquals(toDoList.numberOfCompleteTasks(),2);
         assertEquals(toDoList.numberOfIncompleteTasks(),3);
 
+        toDoList.markAsComplete(69);
+        assertEquals(toDoList.numberOfCompleteTasks(),2);
+        assertEquals(toDoList.numberOfIncompleteTasks(),3);
+
+        toDoList.markAsComplete(1);
+        toDoList.markAsComplete(4);
+        toDoList.markAsComplete(5);
+
+        assertEquals(toDoList.numberOfCompleteTasks(),5);
+        assertEquals(toDoList.numberOfIncompleteTasks(),0);
+
+
+
+
+
+
+
     }
     @Test
     public void removeTaskTest() {
@@ -104,6 +121,11 @@ public class ToDoListTest {
 
         toDoList.removeTask(2);
         assertEquals(toDoList.totalTasks(),3);
+
+        toDoList.removeTask(3);
+        toDoList.removeTask(4);
+        toDoList.removeTask(5);
+        assertEquals(toDoList.totalTasks(),0);
 
     }
 
@@ -123,6 +145,15 @@ public class ToDoListTest {
         toDoList.markAsComplete(3);
         assertEquals(toDoList.numberOfCompleteTasks(),2);
 
+        toDoList.markAsComplete(4);
+        toDoList.markAsComplete(5);
+        assertEquals(toDoList.numberOfCompleteTasks(),4);
+
+        toDoList.markAsComplete(1);
+        assertEquals(toDoList.numberOfCompleteTasks(),5);
+
+
+
     }
 
     @Test
@@ -140,6 +171,27 @@ public class ToDoListTest {
 
         toDoList.markAsComplete(3);
         assertEquals(toDoList.numberOfIncompleteTasks(),3);
+
+        toDoList.markAsComplete(4);
+        toDoList.markAsComplete(5);
+        assertEquals(toDoList.numberOfIncompleteTasks(),1);
+
+        toDoList.markAsComplete(1);
+        assertEquals(toDoList.numberOfIncompleteTasks(),0);
+    }
+
+    @Test
+    public void totalTasksTest() {
+        assertEquals(toDoList.totalTasks(), 0);
+
+        toDoList.addTask(t1);
+        toDoList.addTask(t2);
+        toDoList.addTask(t3);
+        assertEquals(toDoList.totalTasks(), 3);
+
+        toDoList.addTask(t4);
+        toDoList.addTask(t5);
+        assertEquals(toDoList.totalTasks(), 5);
     }
 
 

@@ -17,7 +17,6 @@ public class ToDoList {
         toDoList.add(t);
     }
 
-    // REQUIRES: task with the task number should be in list
     // MODIFIES: this
     // EFFECTS: marks a task with given task number as complete
     public void markAsComplete(Integer i) {
