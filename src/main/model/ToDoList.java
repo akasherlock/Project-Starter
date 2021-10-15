@@ -63,7 +63,11 @@ public class ToDoList {
         return toDoList.size();
     }
 
-    // EFFECTS: displays all the tasks in the to-do list
+    public LinkedList<Task> listOfAllTasks() {
+        return this.toDoList;
+    }
+
+    /*// EFFECTS: displays all the tasks in the to-do list
     public void viewAllTasks() {
         if (toDoList.size() == 0) {
             System.out.println("No Tasks yet!");
@@ -73,7 +77,7 @@ public class ToDoList {
                         + next.getDescription() + " , Is Task Completed?: " + String.valueOf(next.isCompleted()));
             }
         }
-    }
+    }*/
 }
 
 

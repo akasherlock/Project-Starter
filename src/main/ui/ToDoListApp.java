@@ -47,7 +47,7 @@ public class ToDoListApp {
         } else if (command.equals("n")) {
             numberOfCompleteAndIncompleteTasks();
         } else if (command.equals("v")) {
-            viewAllTaskInToDoList();
+            viewAllTasks();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -125,9 +125,16 @@ public class ToDoListApp {
                 + incompleteTaskStr);
     }
 
-    // EFFECTS: Shows all the tasks in to-do list
-    private void viewAllTaskInToDoList() {
-        toDoList.viewAllTasks();
+    // EFFECTS: displays all the tasks in the to-do list
+    public void viewAllTasks() {
+        if (toDoList.totalTasks() == 0) {
+            System.out.println("No Tasks!");
+        } else {
+            for (Task next : toDoList.listOfAllTasks()) {
+                System.out.println("\nTask Number: " + next.getTaskNum() + " , Description: "
+                        + next.getDescription() + " , Is Task Completed?: " + next.isCompleted());
+            }
+        }
     }
 }
 

@@ -29,9 +29,11 @@ public class ToDoListTest {
     public void addSomeTasks() {
         toDoList.addTask(t1);
         assertEquals(toDoList.totalTasks() , 1);
+        assertEquals(toDoList.listOfAllTasks().get(0), t1);
 
         toDoList.addTask(t4);
         assertEquals(toDoList.totalTasks() , 2);
+        assertEquals(toDoList.listOfAllTasks().get(1), t4);
     }
 
     @Test
@@ -101,12 +103,6 @@ public class ToDoListTest {
         assertEquals(toDoList.numberOfCompleteTasks(),5);
         assertEquals(toDoList.numberOfIncompleteTasks(),0);
 
-
-
-
-
-
-
     }
     @Test
     public void removeTaskTest() {
@@ -126,7 +122,6 @@ public class ToDoListTest {
         toDoList.removeTask(4);
         toDoList.removeTask(5);
         assertEquals(toDoList.totalTasks(),0);
-
     }
 
     @Test
@@ -193,6 +188,7 @@ public class ToDoListTest {
         toDoList.addTask(t5);
         assertEquals(toDoList.totalTasks(), 5);
     }
+
 
 
 
