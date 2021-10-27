@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a task having a (unique) task number, description and complete/incomplete status
-public class Task {
+public class Task implements Writable {
     private int taskNum;
     private String description;
     private boolean isCompleted;
@@ -33,4 +36,11 @@ public class Task {
         isCompleted = true;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("taskNum", taskNum);
+        json.put("description", description);
+        return json;
+    }
 }

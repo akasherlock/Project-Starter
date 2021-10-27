@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.LinkedList;
 
-public class ToDoList {
+public class ToDoList implements Writable {
 
     private LinkedList<Task> toDoList;
 
@@ -63,21 +67,28 @@ public class ToDoList {
         return toDoList.size();
     }
 
+    // EFFECTS: returns the list of all tasks in the to-do list
     public LinkedList<Task> listOfAllTasks() {
         return this.toDoList;
     }
 
-    /*// EFFECTS: displays all the tasks in the to-do list
-    public void viewAllTasks() {
-        if (toDoList.size() == 0) {
-            System.out.println("No Tasks yet!");
-        } else {
-            for (Task next : toDoList) {
-                System.out.println("\nTask Number: " + String.valueOf(next.getTaskNum()) + " , Description: "
-                        + next.getDescription() + " , Is Task Completed?: " + String.valueOf(next.isCompleted()));
-            }
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("todolist", todolistToJson());
+        return json;
+    }
+
+    // EFFECTS: returns tasks in this todolist as a JSON array
+    private JSONArray todolistToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Task t : toDoList) {
+            jsonArray.put(t.toJson());
         }
-    }*/
+
+        return jsonArray;
+    }
 }
 
 

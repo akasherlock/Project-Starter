@@ -3,13 +3,23 @@ package ui;
 import model.Task;
 import model.ToDoList;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ToDoListApp {
+    private static final String JSON_STORE = "./data/todolist.json";
     private ToDoList toDoList;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    public ToDoListApp() {
+    public ToDoListApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runToDoList();
     }
 
@@ -22,7 +32,7 @@ public class ToDoListApp {
 
         while (keepGoing) {
             displayMenu();
-            command = input.next();
+            command = input.nextLine();
             command = command.toLowerCase();
 
             if (command.equals("q")) {
@@ -48,10 +58,13 @@ public class ToDoListApp {
             numberOfCompleteAndIncompleteTasks();
         } else if (command.equals("v")) {
             viewAllTasks();
+        } else if (command.equals("s")) {
+            saveWorkRoom();
+        } else if (command.equals("l")) {
+            loadWorkRoom();
         } else {
             System.out.println("Selection not valid...");
         }
-
     }
 
     // EFFECTS: displays menu of options to user
@@ -62,6 +75,8 @@ public class ToDoListApp {
         System.out.println("\tm -> mark a task as complete");
         System.out.println("\tn -> show the number of incomplete and completed tasks");
         System.out.println("\tv -> view all tasks in the todo-list");
+        System.out.println("\ts -> save todo-list to file");
+        System.out.println("\tl -> load todo-list to file");
         System.out.println("\tq -> quit");
     }
 
@@ -77,11 +92,11 @@ public class ToDoListApp {
     // EFFECTS: adds a task to to-do list
     private void addTaskToToDoList() {
         System.out.println("\nEnter Task number: ");
-        String taskNumInStr = input.next();
+        String taskNumInStr = input.nextLine();
         int taskNum = Integer.parseInt(taskNumInStr);
 
         System.out.println("\nEnter Task description: ");
-        String description = input.next();
+        String description = input.nextLine();
 
         Task t = new Task(taskNum, description);
 
@@ -94,7 +109,7 @@ public class ToDoListApp {
     // EFFECTS: removes a task from to-do list
     private void removeTaskFromToDoList() {
         System.out.println("\nEnter Task number: ");
-        String taskNumInStr = input.next();
+        String taskNumInStr = input.nextLine();
         int taskNum = Integer.parseInt(taskNumInStr);
 
         toDoList.removeTask(taskNum);
@@ -106,7 +121,7 @@ public class ToDoListApp {
     // EFFECTS: marks the given task as complete
     private void markTaskAsCompleteFromToDoList() {
         System.out.println("\nEnter Task number: ");
-        String taskNumInStr = input.next();
+        String taskNumInStr = input.nextLine();
         int taskNum = Integer.parseInt(taskNumInStr);
 
         toDoList.markAsComplete(taskNum);
@@ -134,6 +149,29 @@ public class ToDoListApp {
                 System.out.println("\nTask Number: " + next.getTaskNum() + " , Description: "
                         + next.getDescription() + " , Is Task Completed?: " + next.isCompleted());
             }
+        }
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(toDoList);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            toDoList = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file:");
         }
     }
 }
