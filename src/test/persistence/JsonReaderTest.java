@@ -4,11 +4,9 @@ import model.Task;
 import model.ToDoList;
 import org.junit.jupiter.api.Test;
 
-import persistence.JsonTest;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -30,9 +28,7 @@ public class JsonReaderTest extends JsonTest {
         JsonReader reader = new JsonReader("./data/testReaderEmptyToDoList.json");
         try {
             ToDoList toDoList = reader.read();
-            assertEquals(0, toDoList.numberOfIncompleteTasks());
-            assertEquals(0, toDoList.numberOfCompleteTasks());
-
+            assertEquals(0, toDoList.totalTasks());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
