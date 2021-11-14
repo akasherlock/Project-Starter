@@ -86,7 +86,6 @@ public class ToDoList implements Writable {
         for (Task t : toDoList) {
             jsonArray.put(t.toJson());
         }
-
         return jsonArray;
     }
 }

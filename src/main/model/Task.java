@@ -41,6 +41,7 @@ public class Task implements Writable {
         JSONObject json = new JSONObject();
         json.put("taskNum", taskNum);
         json.put("description", description);
+        json.put("isCompleted", isCompleted);
         return json;
     }
 }

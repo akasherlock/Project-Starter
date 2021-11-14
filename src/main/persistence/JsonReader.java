@@ -60,9 +60,12 @@ public class JsonReader {
     private void addTask(ToDoList toDoList, JSONObject jsonObject) {
         int taskNum = jsonObject.getInt("taskNum");
         String description = String.valueOf(jsonObject.getString("description"));
+        boolean isCompleted = jsonObject.getBoolean("isCompleted");
         Task task = new Task(taskNum, description);
+        if (isCompleted) {
+            task.taskCompleted();
+        }
         toDoList.addTask(task);
     }
-
 
 }
