@@ -83,13 +83,21 @@ public class Gui extends JFrame  {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds buttons to panels
+    // EFFECTS: adds textFields/labels to panels
     private void settingPanels(JPanel flow1Panel, JPanel flow2Panel, JPanel flow3Panel, JPanel gridPanel) {
         flow1Panel.add(taskNumLabel);
         flow1Panel.add(taskNumTextField);
         flow1Panel.add(descriptionLabel);
         flow1Panel.add(descriptionTextField);
 
+        addingButtons(flow2Panel, flow3Panel);
+
+        addingPanels(flow1Panel, flow2Panel, flow3Panel, gridPanel);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds buttons to panels
+    private void addingButtons(JPanel flow2Panel, JPanel flow3Panel) {
         flow2Panel.add(addButton);
         flow2Panel.add(removeButton);
         flow2Panel.add(viewAllButton);
@@ -98,8 +106,6 @@ public class Gui extends JFrame  {
         flow3Panel.add(saveButton);
         flow3Panel.add(loadButton);
         flow3Panel.add(quitButton);
-
-        addingPanels(flow1Panel, flow2Panel, flow3Panel, gridPanel);
     }
 
     // MODIFIES: this
@@ -165,8 +171,8 @@ public class Gui extends JFrame  {
     private void loadData() {
         try {
             toDoList = jsonReader.read();
-            JOptionPane.showMessageDialog(null, "Database was Loaded.");
             viewAllTasks();
+            JOptionPane.showMessageDialog(null, "Database was Loaded.");
         } catch (IOException e) {
             System.out.println("Unable to read from file:");
         }
