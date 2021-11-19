@@ -1,12 +1,1 @@
-{"todolist": [
-    {
-        "description": "math",
-        "taskNum": 42,
-        "isCompleted": false
-    },
-    {
-        "description": "vfv",
-        "taskNum": 3,
-        "isCompleted": true
-    }
-]}
+{"todolist": []}

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+// EFFECTS: Creates a ToDoList Application
 public class Gui extends JFrame  {
 
     private ToDoList toDoList = new ToDoList();
@@ -167,6 +167,7 @@ public class Gui extends JFrame  {
         markButton.setIcon(markAsIconResize);
     }
 
+    // MODIFIES: this
     // EFFECTS: loads todolist from file
     private void loadData() {
         try {
