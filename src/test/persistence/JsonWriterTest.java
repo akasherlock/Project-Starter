@@ -57,8 +57,8 @@ public class JsonWriterTest extends JsonTest {
             toDoList = reader.read();
             LinkedList<Task> toDo = toDoList.listOfAllTasks();
             assertEquals(2, toDo.size());
-            checkTask(1, "MATH200 HW1", toDo.get(0));
-            checkTask(2, "Project", toDo.get(1));
+            checkTask(1, "MATH200 HW1", false, toDo.get(0));
+            checkTask(2, "Project", false, toDo.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

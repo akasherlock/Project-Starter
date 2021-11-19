@@ -41,8 +41,8 @@ public class JsonReaderTest extends JsonTest {
             ToDoList toDoList = reader.read();
             LinkedList<Task> todo = toDoList.listOfAllTasks();
             assertEquals(2, todo.size());
-            checkTask(1, "Math 200 hw", todo.get(0));
-            checkTask(2, "Project", todo.get(1));
+            checkTask(1, "Math 200 hw", false, todo.get(0));
+            checkTask(2, "Project", true, todo.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

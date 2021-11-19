@@ -82,6 +82,8 @@ public class Gui extends JFrame  {
         loadButton.addActionListener(event -> loadData());
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds buttons to panels
     private void settingPanels(JPanel flow1Panel, JPanel flow2Panel, JPanel flow3Panel, JPanel gridPanel) {
         flow1Panel.add(taskNumLabel);
         flow1Panel.add(taskNumTextField);
@@ -97,11 +99,18 @@ public class Gui extends JFrame  {
         flow3Panel.add(loadButton);
         flow3Panel.add(quitButton);
 
+        addingPanels(flow1Panel, flow2Panel, flow3Panel, gridPanel);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds panels to gridPanel
+    private void addingPanels(JPanel flow1Panel, JPanel flow2Panel, JPanel flow3Panel, JPanel gridPanel) {
         gridPanel.add(flow1Panel);
         gridPanel.add(flow2Panel);
         gridPanel.add(flow3Panel);
     }
 
+    // EFFECTS: resizes Icon image of all buttons to desired size.
     private void buttonsIconsResize() {
         Image addResize = addIcon.getImage().getScaledInstance(20,20,20);
         ImageIcon addIconResize = new ImageIcon(addResize);
@@ -127,27 +136,32 @@ public class Gui extends JFrame  {
         Image quitResize = quitIcon.getImage().getScaledInstance(20,20,20);
         ImageIcon quitIconResize = new ImageIcon(quitResize);
 
-        addingFlow2PanelButtons(addIconResize, removeIconResize, viewAllIconResize, markAsIconResize);
+        setIconFlow2PanelButtons(addIconResize, removeIconResize, viewAllIconResize, markAsIconResize);
 
-        addingFlow3PanelButtons(saveIconResize, loadIconResize, progressIconResize, quitIconResize);
+        setIconFlow3PanelButtons(saveIconResize, loadIconResize, progressIconResize, quitIconResize);
     }
 
-    private void addingFlow3PanelButtons(ImageIcon saveIconResize, ImageIcon loadIconResize,
-                                         ImageIcon progressIconResize, ImageIcon quitIconResize) {
+    // MODIFIES: this
+    // EFFECTS: sets Icon Image of buttons in flow3Panel
+    private void setIconFlow3PanelButtons(ImageIcon saveIconResize, ImageIcon loadIconResize,
+                                          ImageIcon progressIconResize, ImageIcon quitIconResize) {
         saveButton.setIcon(saveIconResize);
         loadButton.setIcon(loadIconResize);
         progressButton.setIcon(progressIconResize);
         quitButton.setIcon(quitIconResize);
     }
 
-    private void addingFlow2PanelButtons(ImageIcon addIconResize, ImageIcon removeIconResize,
-                                         ImageIcon viewAllIconResize, ImageIcon markAsIconResize) {
+    // MODIFIES: this
+    // EFFECTS: sets Icon Image of buttons in flow2Panel
+    private void setIconFlow2PanelButtons(ImageIcon addIconResize, ImageIcon removeIconResize,
+                                          ImageIcon viewAllIconResize, ImageIcon markAsIconResize) {
         addButton.setIcon(addIconResize);
         removeButton.setIcon(removeIconResize);
         viewAllButton.setIcon(viewAllIconResize);
         markButton.setIcon(markAsIconResize);
     }
 
+    // EFFECTS: loads todolist from file
     private void loadData() {
         try {
             toDoList = jsonReader.read();
@@ -158,6 +172,7 @@ public class Gui extends JFrame  {
         }
     }
 
+    // EFFECTS: saves the current displayed todolist to file
     private void saveData() {
         try {
             jsonWriter.open();
@@ -169,12 +184,16 @@ public class Gui extends JFrame  {
         }
     }
 
+    // EFFECTS: displays the number of incomplete and completed tasks in todolist
     private void progressOfTasks() {
         taskTextArea.setText("");
         taskTextArea.append("Number of Completed Tasks: " + toDoList.numberOfCompleteTasks() + "\n"
                 + "Number of Incomplete Tasks: " + toDoList.numberOfIncompleteTasks());
     }
 
+    // REQUIRES: taskNumTextField.getText() is an integer (string)
+    // MODIFIES: this
+    // EFFECTS: Marks task with the given task number as complete
     private void markTaskCompleted() {
         if (!isTaskInToDoList(taskNumTextField.getText())) {
             JOptionPane.showMessageDialog(null, "Error: Task to be marked is not in the database.");
@@ -188,6 +207,7 @@ public class Gui extends JFrame  {
         }
     }
 
+    // EFFECTS: Checks if the task is in the todolist
     private boolean isTaskInToDoList(String numStr) {
         boolean isTaskUnique = true;
 
@@ -200,6 +220,8 @@ public class Gui extends JFrame  {
         return !isTaskUnique;
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes task with the given task number from the list
     private void removeTask() {
         if (toDoList.totalTasks() == 0) {
             JOptionPane.showMessageDialog(null, "Error: Database is Empty!");
@@ -217,11 +239,13 @@ public class Gui extends JFrame  {
         }
     }
 
+    // EFFECTS: quits the application
     private void quitApplication() {
         JOptionPane.showMessageDialog(null, "Bye! GoodLuck with your work.");
         System.exit(0);
     }
 
+    // EFFECTS: displays all tasks in taskTextArea
     private void viewAllTasks() {
         taskTextArea.setText("");
         for (Task task : toDoList.listOfAllTasks()) {
@@ -229,8 +253,10 @@ public class Gui extends JFrame  {
         }
     }
 
+    // REQUIRES: taskNumTextField.getText() is an integer (string)
+    // MODIFIES: this
+    // EFFECTS: adds task to todolist and displays in taskTextArea
     private void addTask() {
-
         if (isTaskInToDoList(taskNumTextField.getText())) {
             JOptionPane.showMessageDialog(null, "Error: Task Number is already assigned to a different task.");
         } else {

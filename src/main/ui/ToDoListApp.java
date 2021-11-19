@@ -59,9 +59,9 @@ public class ToDoListApp {
         } else if (command.equals("v")) {
             viewAllTasks();
         } else if (command.equals("s")) {
-            saveWorkRoom();
+            saveToDoList();
         } else if (command.equals("l")) {
-            loadWorkRoom();
+            loadToDoList();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -152,8 +152,8 @@ public class ToDoListApp {
         }
     }
 
-    // EFFECTS: saves the workroom to file
-    private void saveWorkRoom() {
+    // EFFECTS: saves the todolist to file
+    private void saveToDoList() {
         try {
             jsonWriter.open();
             jsonWriter.write(toDoList);
@@ -165,8 +165,8 @@ public class ToDoListApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    private void loadWorkRoom() {
+    // EFFECTS: loads todolist from file
+    private void loadToDoList() {
         try {
             toDoList = jsonReader.read();
             System.out.println("Loaded from " + JSON_STORE);

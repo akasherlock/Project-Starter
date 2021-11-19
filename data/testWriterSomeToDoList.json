@@ -1,10 +1,12 @@
 {"todolist": [
     {
         "description": "MATH200 HW1",
-        "taskNum": 1
+        "taskNum": 1,
+        "isCompleted": false
     },
     {
         "description": "Project",
-        "taskNum": 2
+        "taskNum": 2,
+        "isCompleted": false
     }
 ]}

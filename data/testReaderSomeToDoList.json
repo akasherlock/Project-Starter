@@ -2,11 +2,13 @@
   "todolist": [
     {
       "taskNum": 1,
-      "description": "Math 200 hw"
+      "description": "Math 200 hw",
+      "isCompleted": false
     },
     {
       "taskNum": 2,
-      "description": "Project"
+      "description": "Project",
+      "isCompleted": true
     }
   ]
 }

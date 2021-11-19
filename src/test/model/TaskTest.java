@@ -54,4 +54,10 @@ public class TaskTest {
         assertTrue(t7.isCompleted());
     }
 
+    @Test
+    public void toStringTest() {
+        assertEquals("Task Number: " + t1.getTaskNum() + "\t" + "\t" + "Task Description: " + t1.getDescription() + "\t" + "\t"
+                + "Is Task Completed?: " + t1.isCompleted(),t1.toString());
+    }
+
 }
