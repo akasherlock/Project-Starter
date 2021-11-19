@@ -44,4 +44,11 @@ public class Task implements Writable {
         json.put("isCompleted", isCompleted);
         return json;
     }
+
+    @Override
+    public String toString() {
+        return "Task Number: " + taskNum + "\t" + "\t" + "Task Description: " + description + "\t" + "\t"
+                + "Is Task Completed?: " + isCompleted;
+    }
+
 }
