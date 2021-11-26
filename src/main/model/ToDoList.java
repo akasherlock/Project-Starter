@@ -19,6 +19,8 @@ public class ToDoList implements Writable {
     // EFFECTS: adds a task to to-do list
     public void addTask(Task t) {
         toDoList.add(t);
+        EventLog.getInstance().logEvent(new Event("Task with task Number: " + t.getTaskNum()
+                + " was added to the ToDoList."));
     }
 
     // MODIFIES: this
@@ -27,6 +29,8 @@ public class ToDoList implements Writable {
         for (Task next : toDoList) {
             if (next.getTaskNum() == i) {
                 next.taskCompleted();
+                EventLog.getInstance().logEvent(new Event("Task with task Number: " + next.getTaskNum()
+                        + " was marked as complete."));
             }
         }
     }
@@ -36,6 +40,7 @@ public class ToDoList implements Writable {
     // EFFECTS:  removes a task from to-do list
     public void removeTask(Integer i) {
         toDoList.removeIf(next -> next.getTaskNum() == i);
+        EventLog.getInstance().logEvent(new Event("Task with task Number: " + i + " was removed from the ToDoList."));
     }
 
     // EFFECTS: shows the number of incomplete and completed tasks

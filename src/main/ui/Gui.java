@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Task;
 import model.ToDoList;
 import persistence.JsonReader;
@@ -11,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // EFFECTS: Creates a ToDoList Application
-public class Gui extends JFrame  {
+public class Gui extends JFrame {
 
     private ToDoList toDoList = new ToDoList();
     private static final String JSON_STORE = "./data/todolist.json";
@@ -30,7 +32,7 @@ public class Gui extends JFrame  {
 
     JButton addButton = new JButton("Add Task");
     JButton removeButton = new JButton("Remove Task");
-    JButton viewAllButton =  new JButton("View all Tasks");
+    JButton viewAllButton = new JButton("View all Tasks");
     JButton markButton = new JButton("Mark as Complete");
     JButton saveButton = new JButton("Save");
     JButton loadButton = new JButton("Load");
@@ -52,18 +54,18 @@ public class Gui extends JFrame  {
         jsonReader = new JsonReader(JSON_STORE);
 
         JPanel flow1Panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        flow1Panel.setBackground(new Color(255,209,220));
+        flow1Panel.setBackground(new Color(255, 209, 220));
 
         JPanel flow2Panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        flow2Panel.setBackground(new Color(252,246,245));
+        flow2Panel.setBackground(new Color(219, 208, 208));
 
         JPanel flow3Panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        flow3Panel.setBackground(new Color(252,246,245));
+        flow3Panel.setBackground(new Color(219, 208, 208));
 
-        JPanel gridPanel = new JPanel(new GridLayout(3,1));
+        JPanel gridPanel = new JPanel(new GridLayout(3, 1));
 
         taskTextArea.setEditable(false);
-        taskTextArea.setBackground(new Color(173,216,230));
+        taskTextArea.setBackground(new Color(173, 216, 230));
 
         buttonsIconsResize();
 
@@ -118,28 +120,28 @@ public class Gui extends JFrame  {
 
     // EFFECTS: resizes Icon image of all buttons to desired size.
     private void buttonsIconsResize() {
-        Image addResize = addIcon.getImage().getScaledInstance(20,20,20);
+        Image addResize = addIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon addIconResize = new ImageIcon(addResize);
 
-        Image removeResize = removeIcon.getImage().getScaledInstance(20,20,20);
+        Image removeResize = removeIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon removeIconResize = new ImageIcon(removeResize);
 
-        Image viewAllResize = viewAllIcon.getImage().getScaledInstance(20,20,20);
+        Image viewAllResize = viewAllIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon viewAllIconResize = new ImageIcon(viewAllResize);
 
-        Image markAsResize = markIcon.getImage().getScaledInstance(20,20,20);
+        Image markAsResize = markIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon markAsIconResize = new ImageIcon(markAsResize);
 
-        Image saveResize = saveIcon.getImage().getScaledInstance(20,20,20);
+        Image saveResize = saveIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon saveIconResize = new ImageIcon(saveResize);
 
-        Image loadResize = loadIcon.getImage().getScaledInstance(20,20,20);
+        Image loadResize = loadIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon loadIconResize = new ImageIcon(loadResize);
 
-        Image progressResize = progressIcon.getImage().getScaledInstance(20,20,20);
+        Image progressResize = progressIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon progressIconResize = new ImageIcon(progressResize);
 
-        Image quitResize = quitIcon.getImage().getScaledInstance(20,20,20);
+        Image quitResize = quitIcon.getImage().getScaledInstance(20, 20, 20);
         ImageIcon quitIconResize = new ImageIcon(quitResize);
 
         setIconFlow2PanelButtons(addIconResize, removeIconResize, viewAllIconResize, markAsIconResize);
@@ -249,6 +251,7 @@ public class Gui extends JFrame  {
     // EFFECTS: quits the application
     private void quitApplication() {
         JOptionPane.showMessageDialog(null, "Bye! GoodLuck with your work.");
+        printLog();
         System.exit(0);
     }
 
@@ -270,7 +273,7 @@ public class Gui extends JFrame  {
             String taskNumStr = taskNumTextField.getText();
             int taskNum = Integer.parseInt(taskNumStr);
             String description = descriptionTextField.getText();
-            toDoList.addTask(new Task(taskNum,description));
+            toDoList.addTask(new Task(taskNum, description));
 
             viewAllTasks();
 
@@ -279,4 +282,9 @@ public class Gui extends JFrame  {
         }
     }
 
+    public void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.println(next.toString());
+        }
+    }
 }
